@@ -5,11 +5,9 @@ import { ImagePlus, Loader2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import useResturent from "@/store/UseResturent";
 import { ResturentTypes } from "@/schema/ResturentSchema";
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const AddResturents = () => {
-  const navigate = useNavigate();
   const {
     loading,
     createResturents,
@@ -76,8 +74,9 @@ const AddResturents = () => {
         image: undefined,
       });
       window.location.href = "/";
+      setError({});
     } catch (error: any) {
-      toast.error("error to Create Restaurent");
+      toast.error(error.message || "error to Create Restaurent");
     }
   };
 

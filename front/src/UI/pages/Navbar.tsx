@@ -222,7 +222,7 @@ const Navbar = () => {
 
 export const MobileNav = () => {
   const { isAuthentiacte, user, loading, logout, isAdmin } = UserStore();
-  const { resturent, getResturent, permit } = useResturent();
+  const { resturent, getResturent } = useResturent();
 
   useEffect(() => {
     if (isAdmin) {

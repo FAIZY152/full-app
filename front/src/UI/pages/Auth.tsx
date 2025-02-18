@@ -1,4 +1,3 @@
-import React from "react";
 import AuthOption from "../auth/AuthOption";
 
 const Auth = () => {
