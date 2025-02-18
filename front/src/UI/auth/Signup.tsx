@@ -27,7 +27,6 @@ const SignUp = () => {
     e.preventDefault();
     try {
       const res = await signup(input);
-      toast.error(res);
       if (res) {
         toast.success("Registered Successfully");
         navigate("/", { replace: true });

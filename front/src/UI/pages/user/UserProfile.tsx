@@ -14,6 +14,7 @@ import {
   Plus,
 } from "lucide-react";
 import React, { FormEvent, useRef, useState } from "react";
+import { toast } from "sonner";
 
 const UserProfile = () => {
   const { user, updateProfile } = UserStore();
@@ -68,8 +69,8 @@ const UserProfile = () => {
       };
       await updateProfile(updatedProfileData);
       setloading(false);
-    } catch (error) {
-      toast.error(error);
+    } catch (error: any) {
+      toast.error(error.message || "Error updating profile");
       setloading(false);
     }
   };

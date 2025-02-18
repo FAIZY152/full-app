@@ -12,13 +12,14 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { MenuSchema, MenuTypes } from "@/schema/MenuSchema";
 import UseMenu from "@/store/UseMenu";
 import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const EditMenu = ({
   open,
   setOpen,
   menu,
 }: {
-  menu: MenuTypes;
+  menu: any;
   open: boolean;
   setOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
@@ -47,7 +48,7 @@ const EditMenu = ({
     const result = MenuSchema.safeParse(inpt);
     if (!result.success) {
       setError(result.error.formErrors.fieldErrors as Partial<MenuTypes>);
-      toast.error(result.error.formErrors.fieldErrors);
+      toast.error(JSON.stringify(result.error.formErrors.fieldErrors));
       return;
     }
     try {

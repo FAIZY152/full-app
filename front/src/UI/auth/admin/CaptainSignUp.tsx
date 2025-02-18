@@ -2,10 +2,10 @@ import { Loader2 } from "lucide-react";
 import { ChangeEvent, useState } from "react";
 import { SiFoodpanda } from "react-icons/si";
 import { Link, useNavigate } from "react-router-dom";
-import { signupInpt } from "../types/Auth.types";
 import { UserStore } from "@/store/UserStroe";
 import { AxiosError } from "axios";
 import { toast } from "sonner";
+import { signupInpt } from "@/types/UserTypes";
 
 const CaptainSignUp = () => {
   // const loading = false;
