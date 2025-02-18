@@ -9,7 +9,9 @@ import { toast } from "sonner";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const API_ENDPOINT = "http://localhost:5401/api/v1/auth";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+
+const API_ENDPOINT = `${API_URL}/api/v1/auth`;
 axios.defaults.withCredentials = true;
 
 export const UserStore = create<UserState>()(

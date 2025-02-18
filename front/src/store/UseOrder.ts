@@ -3,6 +3,8 @@ import axios from "axios";
 import { toast } from "sonner";
 import { createJSONStorage, persist, PersistOptions } from "zustand/middleware";
 
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+
 export interface OrderItem {
   menuId: string;
   name: string;
@@ -40,7 +42,7 @@ type MyPersist = (
   options: PersistOptions<OrderStore>
 ) => StateCreator<OrderStore>;
 
-const API_ENDPOINT = "http://localhost:5401/api/v1/order";
+const API_ENDPOINT = `${API_URL}/api/v1/order`;
 
 const UseOrderStore = create<OrderStore>(
   (persist as MyPersist)(

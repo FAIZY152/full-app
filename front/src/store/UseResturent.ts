@@ -4,7 +4,9 @@ import { toast } from "sonner";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const API_ENDPOINT = "http://localhost:5401/api/v1/resturent";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+
+const API_ENDPOINT = `${API_URL}/api/v1/resturent`;
 
 axios.defaults.withCredentials = true;
 const useResturent = create<ResturentTypes>()(
@@ -101,7 +103,7 @@ const useResturent = create<ResturentTypes>()(
             set({ singleResturent: null });
           }
         } catch (error: any) {
-          toast.error("Error in Get Resturent");
+          toast.error(error.message || "Error updating menu");
         }
       },
 
@@ -131,7 +133,9 @@ const useResturent = create<ResturentTypes>()(
             // Always return a valid object even if state.resturent is falsy
             return state;
           });
-        } catch (error: any) {}
+        } catch (error: any) {
+          toast.error(error.message || "Error updating menu");
+        }
       },
       deleteMenuResturent: async (menuId: string) => {
         set((state: any) => ({

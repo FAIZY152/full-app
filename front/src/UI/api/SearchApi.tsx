@@ -1,16 +1,19 @@
 import axios from "axios";
+import { toast } from "sonner";
 
-const API_ENDPOINT = "http://localhost:5401/api/v1/resturent";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+
+const API_ENDPOINT = `${API_URL}/api/v1/resturent`;
+
 export const searchLocation = async (country: string, city: string) => {
   try {
     const response = await axios.get(`${API_ENDPOINT}/search/location`, {
       params: { country, city },
     });
-    toast.error(response.data);
     return response.data; // Returns the list of restaurants
   } catch (error: any) {
     console.error("Error fetching restaurants by location:", error);
-    toast.error(error.message);
+    toast.error(error.response?.data?.message || "Error fetching restaurants");
     return [];
   }
 };

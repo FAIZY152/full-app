@@ -5,7 +5,9 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 // Types for restaurant and state
 
-const API_ENDPOINT = "http://localhost:5401/api/v1/resturent";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+
+const API_ENDPOINT = `${API_URL}/api/v1/resturent`;
 
 export interface SearchStoreState {
   loading: boolean;

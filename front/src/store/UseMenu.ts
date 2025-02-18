@@ -12,7 +12,9 @@ type MenuState = {
   DeleteMenu: (restaurantId: string, menuId: string) => Promise<void>;
 };
 
-const API_ENDPOINT = "http://localhost:5401/api/v1/menu";
+const API_URL = import.meta.env.VITE_BACKEND_URL;
+
+const API_ENDPOINT = `${API_URL}/api/v1/menu`;
 
 const UseMenu = create<MenuState>()(
   persist(
