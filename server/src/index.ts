@@ -10,16 +10,9 @@ import connectDB from "./utils/DB";
 
 connectDB();
 
-const app = express(); // Create an express application
-const PORT = process.env.PORT || 5200; // Define the port number
+const app = express();
+const PORT = process.env.PORT || 5200;
 
-// Middleware for parsing JSON requests
-app.use(bodyParser.json({ limit: "10mb" })); // Parse application/json use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
-app.use(cookieParser());
-
-// Define the allowed origin
 const allowedOrigin =
   "https://foodpandalike-fum7twl6q-faizy152s-projects.vercel.app";
 
@@ -37,10 +30,13 @@ const corsOptions: cors.CorsOptions = {
   optionsSuccessStatus: 204,
 };
 
-// Use CORS middleware
 app.use(cors(corsOptions));
 
-// Define a basic route
+// Middleware for parsing JSON requests
+app.use(bodyParser.json({ limit: "10mb" })); // Parse application/json use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(cookieParser());
 
 // Routes
 
