@@ -7,7 +7,6 @@ import { resturentRoute } from "./routes/ResturentRoutes";
 import orderRoute from "./routes/orderRoute";
 import menuRoute from "./routes/MenuRoute";
 import connectDB from "./utils/DB";
-import path from "path";
 
 connectDB();
 
@@ -28,12 +27,10 @@ let corsOption = {
 };
 app.use(cors(corsOption));
 
-
 // Define a basic route
 app.get("/", (req, res) => {
   res.send("Hello, Express!");
 });
-
 
 // Routes
 
