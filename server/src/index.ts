@@ -13,8 +13,7 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5200;
 
-const allowedOrigin =
-  "https://foodpandalike-fum7twl6q-faizy152s-projects.vercel.app";
+const allowedOrigin = "https://foodpandaclone-alpha.vercel.app";
 
 // Configure CORS options
 const corsOptions: cors.CorsOptions = {
