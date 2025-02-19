@@ -19,18 +19,28 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-let corsOption = {
-  origin: "http://localhost:5173",
-  credentials: true,
-  methods: ["GET", "POST", "PATCH", "DELETE", "PUT"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+// Define the allowed origin
+const allowedOrigin =
+  "https://foodpandalike-fum7twl6q-faizy152s-projects.vercel.app";
+
+// Configure CORS options
+const corsOptions: cors.CorsOptions = {
+  origin: (origin, callback) => {
+    if (!origin || origin === allowedOrigin) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  },
+  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+  credentials: true, // Allow cookies to be sent
+  optionsSuccessStatus: 204,
 };
-app.use(cors(corsOption));
+
+// Use CORS middleware
+app.use(cors(corsOptions));
 
 // Define a basic route
-app.get("/", (req, res) => {
-  res.send("Hello, Express!");
-});
 
 // Routes
 
