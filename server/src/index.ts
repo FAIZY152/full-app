@@ -13,31 +13,24 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5200;
 
-const allowedOrigins = [
-  "http://localhost:5173", // Local development
-  "https://foodpandalike.vercel.apps", // Deployed frontend
-];
+app.use(
+  cors({
+    origin: "https://foodpandalike.vercel.app", // Allow requests from frontend
+    credentials: true, // Enable cookies & authentication headers
+  })
+);
 
-const corsOptions: cors.CorsOptions = {
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not allowed by CORS"));
-    }
-  },
-  methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
-  credentials: true, // Allow cookies to be sent
-  optionsSuccessStatus: 204,
-};
-
-app.use(cors(corsOptions));
+// Sample API route
 
 // Middleware for parsing JSON requests
 app.use(bodyParser.json({ limit: "10mb" })); // Parse application/json use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
+
+app.get("/api/v1/auth/check-auth", (req, res) => {
+  res.json({ message: "CORS is working!" });
+});
 
 // Routes
 
