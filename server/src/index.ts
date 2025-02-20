@@ -15,7 +15,7 @@ const PORT = process.env.PORT || 5200;
 
 const allowedOrigins = [
   "http://localhost:5173", // Local development
-  "https://foodpandaclone-alpha.vercel.app", // Deployed frontend
+  "https://foodpandalike.vercel.apps", // Deployed frontend
 ];
 
 const corsOptions: cors.CorsOptions = {
