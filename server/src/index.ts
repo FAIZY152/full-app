@@ -34,7 +34,7 @@ const corsOptions: cors.CorsOptions = {
 app.use(cors(corsOptions));
 
 // Your routes here
-app.get("/api/v1/auth/cors", (req, res) => {
+app.get("/", (req, res) => {
   res.json({ message: "CORS configuration successful" });
 });
 
