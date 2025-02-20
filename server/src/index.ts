@@ -28,7 +28,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(cookieParser());
 
-app.get("/api/v1/auth/check-auth", (req, res) => {
+app.get("/api/v1/auth/cors", (req, res) => {
   res.json({ message: "CORS is working!" });
 });
 
