@@ -33,11 +33,6 @@ const corsOptions: cors.CorsOptions = {
 
 app.use(cors(corsOptions));
 
-// Your routes here
-app.get("/", (req, res) => {
-  res.json({ message: "CORS configuration successful" });
-});
-
 // Middleware for parsing JSON requests
 app.use(bodyParser.json({ limit: "10mb" })); // Parse application/json use(express.json());
 app.use(express.urlencoded({ extended: true }));
