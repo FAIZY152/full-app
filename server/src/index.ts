@@ -13,12 +13,14 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5200;
 
-const allowedOrigin = "https://foodpandaclone-alpha.vercel.app";
+const allowedOrigins = [
+  "http://localhost:5173", // Local development
+  "https://foodpandaclone-alpha.vercel.app", // Deployed frontend
+];
 
-// Configure CORS options
 const corsOptions: cors.CorsOptions = {
   origin: (origin, callback) => {
-    if (!origin || origin === allowedOrigin) {
+    if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true);
     } else {
       callback(new Error("Not allowed by CORS"));
@@ -30,6 +32,11 @@ const corsOptions: cors.CorsOptions = {
 };
 
 app.use(cors(corsOptions));
+
+// Your routes here
+app.get("/api/v1/auth/check-auth", (req, res) => {
+  res.json({ message: "CORS configuration successful" });
+});
 
 // Middleware for parsing JSON requests
 app.use(bodyParser.json({ limit: "10mb" })); // Parse application/json use(express.json());
