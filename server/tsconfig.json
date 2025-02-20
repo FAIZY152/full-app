@@ -1,12 +1,14 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
-    "outDir": "dist",
-    "moduleResolution": "Node",
-    "resolveJsonModule": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true
+    "outDir": "dist", // Output compiled files to 'dist' folder
+    "module": "CommonJS", // Ensure compatibility with Node.js
+    "target": "ES6", // Use ES6 for modern features
+    "rootDir": "src", // Specify the root folder
+    "strict": true, // Enable strict mode
+    "esModuleInterop": true, // Ensure compatibility with CommonJS modules
+    "resolveJsonModule": true, // Allow importing JSON files
+    "skipLibCheck": true, // Skip type checking of declaration files
+    "sourceMap": true // Generate source maps (useful for debugging)
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]
