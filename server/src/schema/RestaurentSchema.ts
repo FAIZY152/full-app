@@ -18,7 +18,7 @@ export const validateRequest = (schema: ZodSchema<any>) => {
     try {
       schema.parse(req.body);
       next(); // ✅ Proceed if validation passes
-    } catch (error) {
+    } catch (error: any) {
       return res.status(400).json({ success: false, errors: error.errors });
     }
   };

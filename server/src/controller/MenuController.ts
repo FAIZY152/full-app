@@ -56,6 +56,13 @@ export const editMenu = async (req: Request, res: Response): Promise<any> => {
     let file = req.file;
     const menu = await MenuModel.findById(id);
 
+    if (!menu) {
+      return res.status(404).json({
+        message: "Menu not found",
+        success: false,
+      });
+    }
+
     if (name) menu.name = name;
     if (description) menu.description = description;
     if (price) menu.price = price;
@@ -103,7 +110,7 @@ export const deleteMenu = async (req: Request, res: Response): Promise<any> => {
       message: "Menu item deleted successfully",
       resturent: updatedResturent,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error deleting menu item:", error.message);
     res
       .status(500)

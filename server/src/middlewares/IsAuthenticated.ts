@@ -25,11 +25,13 @@ const IsAuthenticated = async (
         .status(401)
         .json({ error: "User is Not Authenticated", success: false });
 
+    const jwtToken = process.env.JWT_TOKEN;
+    if (!jwtToken) {
+      throw new Error("JWT token is not defined");
+    }
+
     // verify the token with decode
-    const decode = (await jwt.verify(
-      token,
-      process.env.JWT_TOKEN
-    )) as jwt.JwtPayload;
+    const decode = (await jwt.verify(token, jwtToken)) as jwt.JwtPayload;
 
     if (!decode) {
       return res
@@ -45,6 +47,7 @@ const IsAuthenticated = async (
       .json({ error: "User is Not Authenticated", success: false });
   }
 };
+
 // Adjust the path as needed
 
 export const IsAdmin = async (
@@ -63,8 +66,13 @@ export const IsAdmin = async (
         .json({ error: "User is Not Authenticated", success: false });
     }
 
+    const jwtToken = process.env.JWT_TOKEN;
+    if (!jwtToken) {
+      throw new Error("JWT token is not defined");
+    }
+
     // Verify the token
-    const decode = jwt.verify(token, process.env.JWT_TOKEN) as jwt.JwtPayload;
+    const decode = jwt.verify(token, jwtToken) as jwt.JwtPayload;
 
     // Attach user ID from decoded token to request
     req.id = decode.userid;

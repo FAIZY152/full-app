@@ -9,8 +9,9 @@ const CloudinaryImage = async (file: Express.Multer.File): Promise<string> => {
       folder: "food-panda",
     });
     return updateResponse.secure_url;
-  } catch (error) {
+  } catch (error: any) {
     console.log(error.message);
+    throw new Error("Image upload failed");
   }
 };
 

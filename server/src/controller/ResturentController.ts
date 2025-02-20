@@ -43,7 +43,7 @@ export const CreateResturent = async (
       success: true,
       restaurant,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(400).json({ message: error.message, success: false });
   }
 };
@@ -102,7 +102,9 @@ export const UpdateResturent = async (
         success: false,
       });
     }
-    const cuisinesArray = cusines.split(",").map((cuisine) => cuisine.trim());
+    const cuisinesArray = cusines
+      .split(",")
+      .map((cuisine: any) => cuisine.trim());
 
     resturent.resturentName = resturentName;
     resturent.city = city;
@@ -138,7 +140,7 @@ export const GetOrders = async (req: Request, res: Response): Promise<any> => {
       orders,
       message: "Orders Fetched Successfully",
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(500).json({
       message: error.message,
       success: false,
@@ -176,76 +178,6 @@ export const updateStatus = async (
     });
   }
 };
-
-// export const searchRestaurant = async (
-//   req: Request,
-//   res: Response
-// ): Promise<any> => {
-//   try {
-//     const searchText = req.params.searchText || "";
-//     const searchQuery = (req.query.searchQuery as string) || "";
-//     const selectedCuisines = ((req.query.selectedCuisines as string) || "")
-//       .split(",")
-//       .filter((cuisine) => cuisine);
-//     const query: any = {};
-//     // basic search based on searchText (name ,city, country)
-//     console.log(selectedCuisines);
-
-//     if (searchText) {
-//       query.$or = [
-//         { resturentName: { $regex: searchText, $options: "i" } },
-//         { city: { $regex: searchText, $options: "i" } },
-//         { country: { $regex: searchText, $options: "i" } },
-//       ];
-//     }
-//     // filter on the basis of searchQuery
-//     if (searchQuery) {
-//       query.$or = [
-//         { resturentName: { $regex: searchQuery, $options: "i" } },
-//         { cusines: { $regex: searchQuery, $options: "i" } },
-//       ];
-//     }
-//     console.log(query);
-//     // ["momos", "burger"]
-//     if (selectedCuisines.length > 0) {
-//       query.cusines = { $in: selectedCuisines };
-//     }
-
-//     const restaurants = await ResturentModel.find(query);
-//     return res.status(200).json({
-//       success: true,
-//       data: restaurants,
-//     });
-//   } catch (error) {
-//     console.log(error);
-//     return res.status(500).json({ message: "Internal server error" });
-//   }
-// };
-// export const SearchResturentTest = async (
-//   req: Request,
-//   res: Response
-// ): Promise<any> => {
-//   try {
-//     const searchTxt = req.params.testsearch;
-//     const resturent = await ResturentModel.find({
-//       $or: [
-//         { resturentName: { $regex: searchTxt, options: "i" } },
-//         { city: { $regex: searchTxt, options: "i" } },
-//         { country: { $regex: searchTxt, options: "i" } },
-//       ],
-//     });
-//     return res.status(200).json({
-//       success: true,
-//       resturent,
-//     });
-//   } catch (error) {
-//     return res.status(500).json({
-//       message: "Error Occured to search Resturent",
-//       success: false,
-//       error: error.message,
-//     });
-//   }
-// };
 
 export const searchByLocation = async (
   req: Request,
@@ -348,7 +280,7 @@ export const GetSingleResturent = async (
       message: "Restaurant Fetched Successfully",
       resturent,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(500).json({
       message: error.message,
       success: false,

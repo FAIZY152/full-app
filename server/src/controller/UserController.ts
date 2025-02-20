@@ -31,7 +31,7 @@ export const UserRegister = async (
       message: "User Created Successfully",
       success: true,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error during user registration:", error.message);
     if (!res.headersSent) {
       return res.status(500).json({ message: "Internal Server Error" });
@@ -54,7 +54,7 @@ export const UserLogin = async (req: Request, res: Response): Promise<any> => {
       message: "User Login Successfully",
       success: true,
     });
-  } catch (error) {
+  } catch (error: any) {
     console.error("Error during user registration:", error);
     return res
       .status(500)
@@ -91,7 +91,7 @@ export const forgotPassword = async (
   try {
     const response = await forgotPasswordService(email, fullname, newPassword);
     return res.status(201).send(response);
-  } catch (error) {
+  } catch (error: any) {
     return res.status(400).send({ success: false, message: error.message });
   }
 };
@@ -108,7 +108,7 @@ export const CheckAuth = async (req: Request, res: Response): Promise<any> => {
       });
     }
     return res.status(200).json({ user, success: true });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(500).json({ message: error.message });
   }
 };
@@ -171,7 +171,7 @@ export const CaptainRegister = async (
       message: "User Created Successfully",
       success: true,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(400).json({ message: error.message });
   }
 };
@@ -188,12 +188,18 @@ export const CaptainLogin = async (
 
   try {
     const captain = await loginCaptainService(email, password, res);
+
+    if (!captain) {
+      return res
+        .status(400)
+        .json({ message: "Captain not found", success: false });
+    }
     return res.status(200).json({
       captain,
       message: `Welcome Back ${captain.fullname}`,
       success: true,
     });
-  } catch (error) {
+  } catch (error: any) {
     return res.status(400).json({ message: error.message, success: false });
   }
 };
