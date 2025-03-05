@@ -13,12 +13,12 @@ connectDB();
 const app = express();
 const PORT = process.env.PORT || 5200;
 
-app.use(
-  cors({
-    origin: "https://foodpandalike.vercel.app", // Allow requests from frontend
-    credentials: true, // Enable cookies & authentication headers
-  })
-);
+app.use(cors({ 
+  origin: "https://foodpandalike.vercel.app", 
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', 
+  credentials: true 
+}));
+
 
 // Sample API route
 
