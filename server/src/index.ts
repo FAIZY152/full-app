@@ -15,12 +15,21 @@ const PORT = process.env.PORT || 5200;
 
 app.use(
   cors({
-    origin: "https://foodpandalike.vercel.app", // Allow specific frontend
-    credentials: true, // Allow cookies
-    methods: ["GET", "POST", "PUT", "DELETE"], // Allowed methods
+    origin: "https://foodpandalike.vercel.app", // Allow frontend domain
+    credentials: true, // Required for cookies/sessions
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"], // Allowed HTTP methods
+    allowedHeaders: ["Content-Type", "Authorization"], // Allowed headers
   })
 );
 
+// ✅ 2️⃣ Handle Preflight Requests (OPTIONS method)
+app.options("*", (req, res) => {
+  res.setHeader("Access-Control-Allow-Origin", "https://foodpandalike.vercel.app");
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  res.sendStatus(200);
+});
 
 // Sample API route
 
