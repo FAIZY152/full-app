@@ -52,7 +52,19 @@ app.use(cookieParser());
 app.get("/api/v1/auth/cors", (req, res) => {
   res.json({ message: "CORS is working!" });
 });
+let backendReady = false;
 
+app.get("/api/status", async (req, res) => {
+  if (!backendReady) {
+    console.log("⏳ Warming up backend...");
+    // Simulate warm-up (e.g. connect to DB, load models, etc.)
+    await new Promise((resolve) => setTimeout(resolve, 3000)); // 3 sec delay
+    backendReady = true;
+    console.log("✅ Backend is ready!");
+  }
+
+  res.status(200).json({ status: "ready" });
+});
 // ✅ 6️⃣ Define API Routes
 app.use("/api/v1/auth", userRoute);
 app.use("/api/v1/resturent", resturentRoute);
