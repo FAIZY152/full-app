@@ -30,7 +30,7 @@ resturentRoute.post(
 );
 resturentRoute.get("/get-resturent", IsAuthenticated, GetResturent);
 
-resturentRoute.get("/resturents/:resturenId", GetSingleResturent);
+resturentRoute.get("/resturents/:resturenId", IsAuthenticated, GetSingleResturent);
 resturentRoute.put(
   "/update-resturent",
   IsAdmin,
