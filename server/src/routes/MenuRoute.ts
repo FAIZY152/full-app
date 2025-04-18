@@ -27,6 +27,6 @@ menuRoute
   .route("/delete-menu/:restaurantId/:menuId")
   .delete(IsAuthenticated, deleteMenu);
 
-menuRoute.route("/get-menus").get(IsAuthenticated, getMenus);
+menuRoute.route("/get-menus").get(getMenus);
 
 export default menuRoute;
