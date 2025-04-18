@@ -14,8 +14,6 @@ import {
 import IsAuthenticated, { IsAdmin } from "../middlewares/IsAuthenticated";
 import { Request, Response } from "express";
 
-
-
 export const resturentRoute = express.Router();
 
 // Resturents
@@ -32,11 +30,7 @@ resturentRoute.post(
 );
 resturentRoute.get("/get-resturent", IsAuthenticated, GetResturent);
 
-resturentRoute.get(
-  "/resturents/:resturenId",
-  IsAuthenticated,
-  GetSingleResturent
-);
+resturentRoute.get("/resturents/:resturenId", GetSingleResturent);
 resturentRoute.put(
   "/update-resturent",
   IsAdmin,
